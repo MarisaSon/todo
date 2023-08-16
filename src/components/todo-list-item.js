@@ -49,17 +49,18 @@ export default class TodoListItem extends Component {
 
         <button
           type="button"
-          className="btn btn-outline-success btn-sm float-right"
-          onClick={this.onMarkImportant}
+          className="btn btn-outline-danger btn-sm float-end"
+          onClick={this.props.onDeleteClicked}
         >
-          <i className="fa fa-exclamation" />
+          <i className="fa fa-trash" />
         </button>
 
         <button
           type="button"
-          className="btn btn-outline-danger btn-sm float-right"
+          className="btn btn-outline-success btn-sm float-end"
+          onClick={this.onMarkImportant}
         >
-          <i className="fa fa-trash-o" />
+          <i className="fa fa-exclamation" />
         </button>
       </span>
     );
