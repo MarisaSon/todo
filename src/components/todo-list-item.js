@@ -1,49 +1,30 @@
-import { Component } from "react";
-import "./todo-list-item.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import { Component } from 'react';
+import './todo-list-item.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export default class TodoListItem extends Component {
   constructor() {
     super();
-
-    this.state = {
-      done: false,
-      important: false,
-    };
-
-    this.onLabelClick = () => {
-      this.setState((state) => {
-        return {
-          done: !state.done,
-        };
-      });
-    };
-
-    this.onMarkImportant = () => {
-      this.setState((state) => {
-        return {
-          important: !state.important,
-        };
-      });
-    };
   }
 
   render() {
-    const { label } = this.props;
-    const { done, important } = this.state;
+    const { label, done, important } = this.props;
 
-    let classNames = "todo-list-item";
+    let classNames = 'todo-list-item';
     if (done) {
-      classNames += " done";
+      classNames += ' done';
     }
 
     if (important) {
-      classNames += " important";
+      classNames += ' important';
     }
 
     return (
       <span className={classNames}>
-        <span className="todo-list-item-label" onClick={this.onLabelClick}>
+        <span
+          className="todo-list-item-label"
+          onClick={this.props.onTooggleDone}
+        >
           {label}
         </span>
 
@@ -58,7 +39,7 @@ export default class TodoListItem extends Component {
         <button
           type="button"
           className="btn btn-outline-success btn-sm float-end"
-          onClick={this.onMarkImportant}
+          onClick={this.props.onTooggleImportant}
         >
           <i className="fa fa-exclamation" />
         </button>

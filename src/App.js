@@ -1,10 +1,10 @@
-import { Component } from "react";
-import "./App.css";
-import Header from "./components/app-header";
-import ItemStatusFilter from "./components/item-status-filter";
-import Search from "./components/search-panel";
-import Todolist from "./components/todo-list";
-import AddElementBtn from "./components/btn-add";
+import { Component } from 'react';
+import './App.css';
+import Header from './components/app-header';
+import ItemStatusFilter from './components/item-status-filter';
+import Search from './components/search-panel';
+import Todolist from './components/todo-list';
+import AddElementBtn from './components/btn-add';
 
 export default class App extends Component {
   constructor() {
@@ -14,12 +14,17 @@ export default class App extends Component {
 
     this.state = {
       todoArr: [
-        { label: "Drink coffee", important: false, id: 1 },
-        { label: "Learn react", important: true, id: 2 },
-        { label: "Have a lunch", important: false, id: 3 },
+        { label: 'Drink coffee', important: false, id: 1, done: false },
+        { label: 'Learn react', important: true, id: 2, done: false },
+        { label: 'Have a lunch', important: false, id: 3, done: false },
       ],
+      word: '',
+      status: 'All',
     };
 
+    /**
+     * Удаляет элемент по Id 
+     */
     this.deleteElement = (id) => {
       this.setState((state) => {
         const idx = state.todoArr.findIndex(function (el) {
@@ -36,11 +41,15 @@ export default class App extends Component {
       });
     };
 
+    /**
+     * Добавляет элемент с указанным текстом 
+     */
     this.addElement = (text) => {
       const newElement = {
         label: text,
         important: false,
         id: this.maxId++,
+        done: false,
       };
       this.setState((state) => {
         const newArr = [...state.todoArr, newElement];
@@ -50,18 +59,107 @@ export default class App extends Component {
         };
       });
     };
+
+    /**
+     * Переключает отображение элемента как важный
+     */
+    this.onTooggleImportant = (id) => {
+      this.setState((state) => {
+        const idx = state.todoArr.findIndex(function (el) {
+          return el.id === id;
+        });
+        const oldItem = state.todoArr[idx];
+        const newItem = { ...oldItem, important: !oldItem.important };
+        const newArray = [
+          ...state.todoArr.slice(0, idx),
+          newItem,
+          ...state.todoArr.slice(idx + 1),
+        ];
+        return {
+          todoArr: newArray,
+        };
+      });
+    };
+
+    /**
+     * Переключает отображение элемента как выполненный
+     */
+    this.onTooggleDone = (id) => {
+      this.setState((state) => {
+        const idx = state.todoArr.findIndex(function (el) {
+          return el.id === id;
+        });
+        const oldItem = state.todoArr[idx];
+        const newItem = { ...oldItem, done: !oldItem.done };
+        const newArray = [
+          ...state.todoArr.slice(0, idx),
+          newItem,
+          ...state.todoArr.slice(idx + 1),
+        ];
+        return {
+          todoArr: newArray,
+        };
+      });
+    };
+
+    /**
+     * Ищет элементы по заданной строке 
+     */
+    this.search = (items, word) => {
+      const filtered = items.filter((el) => {
+        return el.label.toLowerCase().indexOf(word.toLowerCase()) > -1;
+      });
+      return filtered;
+    };
+
+    /**
+     * Обновляет стейт  
+     */
+    this.onSearch = (word) => {
+      this.setState({ word });
+    };
+
+    /**
+     * Обновляет стейт  
+     */
+    this.onStatusChanged = (status) => {
+      this.setState({ status });
+    };
   }
 
   render() {
+    const statusItems = this.state.todoArr.filter((el) => {
+      switch (this.state.status) {
+        case 'All':
+          return true;
+        case 'Active':
+          return el.done === false;
+        case 'Done':
+          return el.done === true;
+      }
+    });
+    const visibleItems = this.search(statusItems, this.state.word);
+    const doneCount = this.state.todoArr.filter(
+      (el) => el.done === true,
+    ).length;
+    const todoCount = this.state.todoArr.length - doneCount;
     return (
       <div className="todo-app">
-        <Header toDo={1} done={3} />
+        <Header toDo={todoCount} done={doneCount} />
         <div className="top-panel d-flex">
-          <Search />
-          <ItemStatusFilter />
+          <Search onSearch={this.onSearch} />
+          <ItemStatusFilter
+            status={this.state.status}
+            onStatusChanged={this.onStatusChanged}
+          />
         </div>
 
-        <Todolist list={this.state.todoArr} onDeleted={this.deleteElement} />
+        <Todolist
+          list={visibleItems}
+          onDeleted={this.deleteElement}
+          onTooggleImportant={this.onTooggleImportant}
+          onTooggleDone={this.onTooggleDone}
+        />
         <AddElementBtn onAdded={this.addElement} />
       </div>
     );

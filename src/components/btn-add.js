@@ -1,21 +1,43 @@
-import { Component } from "react";
-import "./btn-add.css";
+import { Component } from 'react';
+import './btn-add.css';
 
 export default class AddElementBtn extends Component {
   constructor() {
     super();
+    this.state = {
+      label: '',
+    };
+
+    /**
+     * Обновляет state.label значением из input
+     */
+    this.onLabelChange = (e) => {
+      this.setState({ label: e.target.value });
+    };
+
+    /**
+     * Добавляет элемент
+     */
+    this.onSubmit = (e) => {
+      e.preventDefault();
+      this.props.onAdded(this.state.label);
+      this.setState({ label: '' });
+    };
   }
   render() {
     return (
-      <div className="button">
-        <button
-          type="button"
-          className="btn btn-outline-secondary float-end"
-          onClick={() => this.props.onAdded("Hello")}
-        >
+      <form className="button d-flex" onSubmit={this.onSubmit}>
+        <input
+          type="text"
+          className="form-control"
+          onChange={this.onLabelChange}
+          placeholder="Whats needs to be done"
+          value={this.state.label}
+        />
+        <button className="btn btn-outline-secondary float-end">
           Add Element
         </button>
-      </div>
+      </form>
     );
   }
 }

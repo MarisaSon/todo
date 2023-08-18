@@ -1,3 +1,7 @@
 .button{
     margin-top: 12px;
 }
+
+.button input{
+    margin-right: 4px;
+}
