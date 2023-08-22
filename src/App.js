@@ -1,10 +1,10 @@
 import { Component } from 'react';
 import './App.css';
-import Header from './components/app-header';
-import ItemStatusFilter from './components/item-status-filter';
-import Search from './components/search-panel';
-import Todolist from './components/todo-list';
-import AddElementBtn from './components/btn-add';
+import Header from './components/app-header/app-header';
+import ItemStatusFilter from './components/item-status-filter/item-status-filter';
+import Search from './components/search-panel/search-panel';
+import Todolist from './components/todo-list/todo-list';
+import AddElementBtn from './components/btn-add/btn-add';
 
 export default class App extends Component {
   constructor() {
@@ -23,7 +23,7 @@ export default class App extends Component {
     };
 
     /**
-     * Удаляет элемент по Id 
+     * Удаляет элемент по Id
      */
     this.deleteElement = (id) => {
       this.setState((state) => {
@@ -42,15 +42,20 @@ export default class App extends Component {
     };
 
     /**
-     * Добавляет элемент с указанным текстом 
+     * Добавляет элемент с указанным текстом
      */
     this.addElement = (text) => {
+      if (text === '') {
+        alert('Введите значение!');
+        return;
+      }
       const newElement = {
         label: text,
         important: false,
         id: this.maxId++,
         done: false,
       };
+
       this.setState((state) => {
         const newArr = [...state.todoArr, newElement];
 
@@ -103,7 +108,7 @@ export default class App extends Component {
     };
 
     /**
-     * Ищет элементы по заданной строке 
+     * Ищет элементы по заданной строке
      */
     this.search = (items, word) => {
       const filtered = items.filter((el) => {
@@ -113,14 +118,14 @@ export default class App extends Component {
     };
 
     /**
-     * Обновляет стейт  
+     * Обновляет стейт
      */
     this.onSearch = (word) => {
       this.setState({ word });
     };
 
     /**
-     * Обновляет стейт  
+     * Обновляет стейт
      */
     this.onStatusChanged = (status) => {
       this.setState({ status });

@@ -22,3 +22,10 @@
   font-weight: bold;
   color: steelblue;
 }
+
+@media(max-width: 600px) {
+  .btn-outline-success:focus {
+    background-color: #fff;
+    color: #198754
+  }
+}
