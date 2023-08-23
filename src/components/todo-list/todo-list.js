@@ -1,10 +1,14 @@
 import TodoListItem from '../todo-list-item/todo-list-item';
-import './todo-list.css';
+import styles from './todo-list.module.css';
+import cx from 'classnames';
 
 const Todolist = ({ list, onDeleted, onTooggleImportant, onTooggleDone }) => {
   const elements = list.map((item) => {
     return (
-      <li key={item.id} className="list-group-item">
+      <li
+        key={item.id}
+        className={cx('list-group-item', styles['list-group-item'])}
+      >
         <TodoListItem
           {...item}
           onDeleteClicked={function () {

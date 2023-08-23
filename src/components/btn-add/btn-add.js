@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import './btn-add.css';
+import styles from './btn-add.module.css';
+import cx from 'classnames';
 
 export default class AddElementBtn extends Component {
   constructor() {
@@ -26,7 +27,7 @@ export default class AddElementBtn extends Component {
   }
   render() {
     return (
-      <form className="button d-flex" onSubmit={this.onSubmit}>
+      <form className={cx('d-flex', styles.button)} onSubmit={this.onSubmit}>
         <input
           type="text"
           className="form-control"
@@ -34,7 +35,14 @@ export default class AddElementBtn extends Component {
           placeholder="Whats needs to be done"
           value={this.state.label}
         />
-        <button className="btn btn-outline-secondary float-end">
+        <button
+          className={cx(
+            'btn',
+            'btn-outline-secondary',
+            'float-end',
+            styles.btn,
+          )}
+        >
           Add Element
         </button>
       </form>

@@ -1,5 +1,5 @@
-import './item-status-filter.css';
 import { Component } from 'react';
+
 export default class ItemStatusFilter extends Component {
   constructor() {
     super();

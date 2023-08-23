@@ -1,9 +1,13 @@
-import './app-header.css'
-const Header = ({toDo, done}) => {
+import styles from './app-header.module.css';
+import cx from 'classnames';
+
+const Header = ({ toDo, done }) => {
   return (
-    <div className='app-header d-flex'>
+    <div className={cx('d-flex', styles['app-header'])}>
       <h1> Todo List</h1>
-      <h2>{toDo} more to do, {done} done</h2>
+      <h2>
+        {toDo} more to do, {done} done
+      </h2>
     </div>
   );
 };

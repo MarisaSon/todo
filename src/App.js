@@ -1,5 +1,7 @@
 import { Component } from 'react';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import cx from 'classnames';
+import styles from './App.module.css';
 import Header from './components/app-header/app-header';
 import ItemStatusFilter from './components/item-status-filter/item-status-filter';
 import Search from './components/search-panel/search-panel';
@@ -149,9 +151,9 @@ export default class App extends Component {
     ).length;
     const todoCount = this.state.todoArr.length - doneCount;
     return (
-      <div className="todo-app">
+      <div className={styles['todo-app']}>
         <Header toDo={todoCount} done={doneCount} />
-        <div className="top-panel d-flex">
+        <div className={cx('d-flex', styles['top-panel'])}>
           <Search onSearch={this.onSearch} />
           <ItemStatusFilter
             status={this.state.status}

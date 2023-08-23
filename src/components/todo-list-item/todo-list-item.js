@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import './todo-list-item.css';
+import styles from './todo-list-item.module.css';
+import cx from 'classnames';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export default class TodoListItem extends Component {
@@ -10,19 +11,15 @@ export default class TodoListItem extends Component {
   render() {
     const { label, done, important } = this.props;
 
-    let classNames = 'todo-list-item';
-    if (done) {
-      classNames += ' done';
-    }
-
-    if (important) {
-      classNames += ' important';
-    }
+    const itemСlassNames = {
+      [styles.done]: done,
+      [styles.important]: important,
+    };
 
     return (
-      <span className={classNames}>
+      <span className={cx(styles['todo-list-item'], itemСlassNames)}>
         <span
-          className="todo-list-item-label"
+          className={styles['todo-list-item-label']}
           onClick={this.props.onTooggleDone}
         >
           {label}
@@ -38,7 +35,13 @@ export default class TodoListItem extends Component {
 
         <button
           type="button"
-          className="btn btn-outline-success btn-sm float-end"
+          className={cx(
+            'btn',
+            'btn-outline-success',
+            'btn-sm',
+            'float-end',
+            styles['btn-outline-success'],
+          )}
           onClick={this.props.onTooggleImportant}
         >
           <i className="fa fa-exclamation" />
