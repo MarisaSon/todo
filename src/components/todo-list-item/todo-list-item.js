@@ -11,14 +11,11 @@ export default class TodoListItem extends Component {
   render() {
     const { label, done, important } = this.props;
 
-    let classNames = styles['todo-list-item'];
-    if (done) {
-      classNames += ' ' + styles.done;
-    }
-
-    if (important) {
-      classNames += ' ' + styles.important;
-    }
+    const classNames = {
+      [styles['todo-list-item']]: true,
+      [styles.done]: done,
+      [styles.important]: important,
+    };
 
     return (
       <span className={cx(classNames)}>
@@ -39,7 +36,13 @@ export default class TodoListItem extends Component {
 
         <button
           type="button"
-          className={cx("btn", "btn-outline-success", "btn-sm", "float-end", styles['btn-outline-success'])}
+          className={cx(
+            'btn',
+            'btn-outline-success',
+            'btn-sm',
+            'float-end',
+            styles['btn-outline-success'],
+          )}
           onClick={this.props.onTooggleImportant}
         >
           <i className="fa fa-exclamation" />

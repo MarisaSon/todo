@@ -35,7 +35,14 @@ export default class AddElementBtn extends Component {
           placeholder="Whats needs to be done"
           value={this.state.label}
         />
-        <button className={cx('btn', 'btn-outline-secondary', 'float-end', styles.btn)}>
+        <button
+          className={cx(
+            'btn',
+            'btn-outline-secondary',
+            'float-end',
+            styles.btn,
+          )}
+        >
           Add Element
         </button>
       </form>

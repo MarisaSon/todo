@@ -8,7 +8,7 @@ export default class Search extends Component {
     this.state = { word: '' };
 
     /**
-     * Обновляет стейт и вызывает внешнюю функцию onSearch 
+     * Обновляет стейт и вызывает внешнюю функцию onSearch
      */
     this.onSearch = (e) => {
       const word = e.target.value;
@@ -21,7 +21,7 @@ export default class Search extends Component {
     return (
       <input
         type="text"
-        className={cx('form-control',  styles['search-input'])}
+        className={cx('form-control', styles['search-input'])}
         placeholder="search"
         onChange={this.onSearch}
         value={this.state.word}
