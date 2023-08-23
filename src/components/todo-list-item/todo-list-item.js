@@ -11,13 +11,13 @@ export default class TodoListItem extends Component {
   render() {
     const { label, done, important } = this.props;
 
-    const spanClassNames = {
+    const itemСlassNames = {
       [styles.done]: done,
       [styles.important]: important,
     };
 
     return (
-      <span className={cx(styles['todo-list-item'], spanClassNames)}>
+      <span className={cx(styles['todo-list-item'], itemСlassNames)}>
         <span
           className={styles['todo-list-item-label']}
           onClick={this.props.onTooggleDone}
