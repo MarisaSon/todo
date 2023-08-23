@@ -23,7 +23,7 @@ export default class TodoListItem extends Component {
     return (
       <span className={cx(classNames)}>
         <span
-          className={cx('todo-list-item-label', styles['todo-list-item-label'])}
+          className={styles['todo-list-item-label']}
           onClick={this.props.onTooggleDone}
         >
           {label}
