@@ -151,9 +151,9 @@ export default class App extends Component {
     ).length;
     const todoCount = this.state.todoArr.length - doneCount;
     return (
-      <div className={cx('todo-app', styles['todo-app'])}>
+      <div className={styles['todo-app']}>
         <Header toDo={todoCount} done={doneCount} />
-        <div className={cx('d-flex', 'top-panel', styles['top-panel'])}>
+        <div className={cx('d-flex', styles['top-panel'])}>
           <Search onSearch={this.onSearch} />
           <ItemStatusFilter
             status={this.state.status}

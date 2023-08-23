@@ -27,7 +27,7 @@ export default class AddElementBtn extends Component {
   }
   render() {
     return (
-      <form className={cx('d-flex', 'button', styles.button)} onSubmit={this.onSubmit}>
+      <form className={cx('d-flex', styles.button)} onSubmit={this.onSubmit}>
         <input
           type="text"
           className="form-control"
