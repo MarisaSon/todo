@@ -1,4 +1,5 @@
-import './search-panel.css';
+import styles from './search-panel.module.css';
+import cx from 'classnames';
 import { Component } from 'react';
 
 export default class Search extends Component {
@@ -20,7 +21,7 @@ export default class Search extends Component {
     return (
       <input
         type="text"
-        className="form-control search-input"
+        className={cx('form-control', 'search-input', styles['search-input'])}
         placeholder="search"
         onChange={this.onSearch}
         value={this.state.word}
